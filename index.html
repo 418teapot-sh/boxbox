@@ -20,6 +20,7 @@
   --mono:'Pretendard Variable',Pretendard,-apple-system,BlinkMacSystemFont,system-ui,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;
   color-scheme:dark;
 }
+[hidden]{display:none!important}
 html,body{height:100%}
 body{margin:0;background:var(--asphalt);color:var(--ink);font-family:var(--mono);font-variant-numeric:tabular-nums;
   padding:18px 16px 28px;display:flex;justify-content:center;align-items:flex-start}
@@ -210,6 +211,11 @@ body{margin:0;background:var(--asphalt);color:var(--ink);font-family:var(--mono)
 .osec+.osec{margin-top:17px}
 .otitle{font-family:var(--display);font-size:9.5px;font-weight:700;letter-spacing:.17em;
   text-transform:uppercase;color:var(--ink-dim);margin-bottom:8px}
+.donebtn{margin-top:18px;width:100%;padding:12px;cursor:pointer;border-radius:3px;
+  border:1px solid var(--team);background:transparent;color:var(--team);
+  font-family:var(--display);font-size:13px;font-weight:700;letter-spacing:.14em}
+.donebtn:hover{background:var(--team);color:var(--deep)}
+.donebtn:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
 .diffs{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
 .diffbtn{padding:11px 4px;cursor:pointer;border:1px solid var(--line);border-radius:3px;
   background:transparent;color:var(--ink-dim);
@@ -411,6 +417,7 @@ body{margin:0;background:var(--asphalt);color:var(--ink);font-family:var(--mono)
         <div class="otitle">Colour</div>
         <div class="swatches" id="swatches"></div>
       </div>
+      <button class="donebtn" id="doneBtn">START</button>
     </div>
   </div>
 
@@ -496,14 +503,15 @@ body{margin:0;background:var(--asphalt);color:var(--ink);font-family:var(--mono)
     b.setAttribute('aria-label',t.n); b.setAttribute('aria-pressed','false');
     b.style.background='linear-gradient(180deg,'+t.bgHi+' 0%,'+t.mid+' 100%)';
     b.innerHTML='<span style="background:'+t.t+'"></span>';
-    b.addEventListener('click',function(){ applyTheme(t); overlay.hidden=true });
+    b.addEventListener('click',function(){ applyTheme(t) });
     swatches.appendChild(b); tiles.push(b);
   });
   (function(){
     var saved=null;
     try{saved=localStorage.getItem('pitstop.theme')}catch(e){}
     var t=THEMES.filter(function(x){return x.id===saved})[0];
-    if(t){ applyTheme(t); overlay.hidden=true } else { overlay.hidden=false }
+    applyTheme(t || THEMES[4]);
+    overlay.hidden = !!t;
   })();
   themeBtn.addEventListener('click',function(){ overlay.hidden=false });
 
@@ -819,6 +827,9 @@ body{margin:0;background:var(--asphalt);color:var(--ink);font-family:var(--mono)
     el.tap.textContent='AGAIN — SPACE / TAP';
   }
 
+  function closeOverlay(){ overlay.hidden=true }
+  id('doneBtn').addEventListener('click',closeOverlay);
+
   var copyBtn=id('copyBtn'), shareBox=id('shareBox');
   copyBtn.addEventListener('click',function(){
     shareBox.hidden=true;
@@ -838,7 +849,13 @@ body{margin:0;background:var(--asphalt);color:var(--ink);font-family:var(--mono)
     }catch(e){ manual() }
   });
 
-  function onKey(e){ if(overlay&&!overlay.hidden) return; if(e.code==='Space'||e.key===' '){e.preventDefault();hit()} }
+  function onKey(e){
+    if(overlay && !overlay.hidden){
+      if(e.code==='Space'||e.key===' '||e.key==='Enter'||e.key==='Escape'){ e.preventDefault(); closeOverlay() }
+      return;
+    }
+    if(e.code==='Space'||e.key===' '){ e.preventDefault(); hit() }
+  }
   function bind(doc){ doc.addEventListener('keydown',onKey) }
   bind(document);
   el.tap.addEventListener('click',hit);
