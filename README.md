@@ -3,13 +3,17 @@
 A one-key F1 pit stop game. Bring the car into the box, swap four tyres, and release it —
 timed to the thousandth of a second against a real sub-2-second benchmark.
 
-**[▶ Play it here](https://418teapot-sh.github.io/boxbox/)**
+[![Play now](https://img.shields.io/badge/play%20now-418teapot--sh.github.io%2Fboxbox-ff2e3c?style=for-the-badge)](https://418teapot-sh.github.io/boxbox/)
 
-<!-- 스크린샷: 플레이 화면 캡처해서 docs/screenshot.png 로 넣고 아래 주석 해제
+![Single file](https://img.shields.io/badge/single%20file-94%20KB-3a4049?style=flat-square)
+![Dependencies](https://img.shields.io/badge/dependencies-none-3a4049?style=flat-square)
+![Build](https://img.shields.io/badge/build-none-3a4049?style=flat-square)
+[![License](https://img.shields.io/badge/license-MIT-3a4049?style=flat-square)](LICENSE)
+
+
 ![BOX BOX](docs/screenshot.png)
--->
 
-## How to play
+## 🏁 How to play
 
 Everything is one key: **SPACE** (or tap).
 
@@ -19,7 +23,7 @@ Everything is one key: **SPACE** (or tap).
 | **The stop** | Hit SPACE while the needle is inside the green zone. The dark band in the middle is a perfect hit. |
 | **Release** | Wait for the green light, then go. |
 
-### What it costs you
+### ⏱ What it costs you
 
 | | |
 |---|---|
@@ -31,7 +35,7 @@ Everything is one key: **SPACE** (or tap).
 Three difficulties — **ROOKIE / PRO / ACE** — change the needle speed, the green zone width,
 the entry speed and the re-gun risk together. Best times are tracked separately per difficulty.
 
-## Run it locally
+## 💾 Run it locally
 
 No build, no server, no dependencies. Download `index.html` and open it in a browser.
 
@@ -43,7 +47,7 @@ open index.html      # Windows: start index.html
 
 The font is embedded in the file, so it works offline and on `file://`.
 
-## Tuning
+## 🔧 Tuning
 
 Difficulty numbers live in one array near the top of the script:
 
@@ -64,7 +68,7 @@ var DIFFS=[
 
 `sweep × zone` is the window you actually get. PRO is 149ms; ACE is 80ms.
 
-## Notes
+## 📝 Notes
 
 Single HTML file, no dependencies, no network calls. The typeface is
 [Pretendard](https://github.com/orioncactus/pretendard) (SIL OFL 1.1), subset to Latin
@@ -72,6 +76,6 @@ and embedded as a data URI.
 
 Teams, colours and liveries are invented. No real Formula 1 team, driver or sponsor is used.
 
-## License
+## ⚖️ License
 
 MIT — see [LICENSE](LICENSE).
